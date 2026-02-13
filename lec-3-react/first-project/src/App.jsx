@@ -225,7 +225,7 @@ import { useState } from 'react'
 
 const App = () => {
   let[state, setState]=useState(0);
-  let[user, setUser]=useState([{name:"tanish", age:20}]);
+  let[user, setUser]=useState([{name:"tanish", age:21}]);
   
 
   
@@ -238,23 +238,75 @@ const App = () => {
 
 
   //
-  function addUser(){
+  function addUser(name, age){
     //user.push({name:name,age:age})
     //setUser(user)//same refernce value chage kar deti hain
     //jisser previous state change hogya aur  rule voilate hogya -> previous state should be immutable
 
-    let newUser=[];
-    user.forEach((u)=>newUser.push(u));
-    newUser.push({name:name,age:age})
+    // let newUser=[];
+    // user.forEach((u)=>newUser.push(u));
+    // newUser.push({name:name,age:age})
+    // setUser(newUser);
+
+
+
+
+    //using spread operator (...)
+    //[1,2,3]---> ...[1,2,3] ==> 1,2,3 ,...[{},{},{}]
+
+    let newUser=[...user,{name:name,age:age}]; // spread operator se new array ban jayega jisme same elements honge
     setUser(newUser);
   }
+
+
+
+
   return (
     <div>
-      
+      <h1>Users</h1>
+
+      {/* react main loop ke liye hamesha map use karna hain aur java script ke liye curly braces use karna hain */}
+        {user.map((u) => {
+          return (
+            <div>
+              <h2>{u.name}</h2>
+              <p>Age: {u.age}</p>
+            </div>
+          );
+        })}
+        <div>
+          <h2>Add User</h2>
+          <input type="text" placeholder="Name" />
+          <input type="number" placeholder="Age"  />
+          <button onClick={function(){addUser(name,age)}}>add user</button>
+        </div>
     </div>
   )
 }
 
 export default App
 
+// btn.addEventListener("click", function() {
+//   const name = document.querySelector("input[type=text]").value;
+//   const age = document.querySelector("input[type=number]").value;
+//   addUser(name, age);
+// });
 
+//event listner ka kaam kya hota hian?
+// Event listener ka kaam hota hai kisi specific event (jaise click, hover, etc.) ko detect karna aur us event hone par kuch action lena. Ye user interactions ko handle karne ke liye use hota hai.
+
+
+
+
+
+
+//what does spread operator (...) do?
+// The spread operator (...) allows an iterable (like an array) to be expanded in places where zero or more elements are expected. It can be used to create shallow copies of arrays or objects, merge arrays, and more.
+// It is denoted by three consecutive dots (...) followed by the iterable to be expanded.
+// For example, in the expression [...array], the spread operator creates a shallow copy of the array.
+
+
+
+//virtual dom
+// Virtual DOM ek lightweight copy hoti hai real DOM ki. Jab bhi state change hoti hai, React pehle Virtual DOM ko update karta hai, phir changes ko real DOM par apply karta hai. Isse performance improve hoti hai kyunki direct DOM manipulation slow hota hai.
+////////
