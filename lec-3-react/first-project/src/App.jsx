@@ -309,4 +309,5 @@ export default App
 
 //virtual dom
 // Virtual DOM ek lightweight copy hoti hai real DOM ki. Jab bhi state change hoti hai, React pehle Virtual DOM ko update karta hai, phir changes ko real DOM par apply karta hai. Isse performance improve hoti hai kyunki direct DOM manipulation slow hota hai.
-////////
+//reconciliation
+// Reconciliation ek process hai jisme React ye decide karta hai ki kaunse components ko update karna hai, kaunse ko add karna hai, aur kaunse ko remove karna hai. Ye Virtual DOM aur real DOM ke beech differences ko compare karke hota hai. Isse performance improve hoti hai kyunki React sirf un components ko re-render karta hai jisme changes hue hain.
